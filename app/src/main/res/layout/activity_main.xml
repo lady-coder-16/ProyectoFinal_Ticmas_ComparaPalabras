@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="50dp"
+    android:background="@drawable/gradient"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <EditText
+            android:id="@+id/et_palabra1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:padding="5dp"
+            android:background="@color/white_grey"
+
+            android:inputType="text"
+            android:hint="@string/hint_palabra" />
+
+        <TextView
+            android:id="@+id/text_vs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:text="@string/vs" />
+
+        <EditText
+            android:id="@+id/et_palabra2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:padding="5dp"
+            android:background="@color/white_grey"
+
+            android:inputType="text"
+            android:hint="@string/hint_palabra" />
+
+        <Button
+            android:id="@+id/btn_comparar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:backgroundTint="@color/end_color"
+            android:shadowColor="@color/black"
+            android:text="@string/btn_comparar" />
+
+        <TextView
+            android:id="@+id/text_sonIguales"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_margin="10dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:text="@string/text_igualdad" />
+
+        <TextView
+            android:id="@+id/text_resultado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@color/purple_400"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:hint="@string/hint_resultado"  />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

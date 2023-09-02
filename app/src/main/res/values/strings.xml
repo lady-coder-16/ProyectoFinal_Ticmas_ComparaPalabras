@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Compara-Palabras</string>
+
+    <!--  Layout Compara-Palabras (activity_main)  -->
+    <string name="hint_palabra">Ingrese una Palabra</string>
+    <string name="vs">vs</string>
+    <string name="btn_comparar">Comparar</string>
+    <string name="text_igualdad">¿Son Iguales?</string>
+    <string name="hint_resultado">Resultado</string>
+</resources>
