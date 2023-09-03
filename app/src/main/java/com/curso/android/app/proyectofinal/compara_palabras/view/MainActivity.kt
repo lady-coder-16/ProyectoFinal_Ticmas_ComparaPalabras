@@ -17,10 +17,16 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         viewModel = ViewModelProvider(this)[ComparadorViewModel::class.java]
+
+        viewModel.mensajeLiveData.observe(this) { mensaje ->
+            // Actualiza la IU con el mensaje
+            updateResultadoComparacion(mensaje)
+        }
 
         binding.btnComparar.setOnClickListener {
             val palabra1 = binding.etPalabra1.text.toString()
@@ -28,27 +34,20 @@ class MainActivity : AppCompatActivity() {
 
             viewModel.setPalabras(palabra1, palabra2)
 
+            viewModel.setMensajeResultado()
             ocultarTeclado(it)
-            updateResultadoComparacion()
         }
     }
 
-        private fun updateResultadoComparacion() {
-            val resultado = viewModel.getResultadoComparacion()
-            binding.textResultado.text = modificartextoSegunResultado(resultado)
-        }
-
-        private fun modificartextoSegunResultado (resultado : Boolean) : String{
-            val txtResultado = if (resultado){
-                "True.\nSon Iguales"
-            } else {
-                "False.\nSon Distintas"
-            }
-            return txtResultado
-        }
+    private fun updateResultadoComparacion(mensaje: String) {
+        binding.textResultado.text = mensaje
     }
 
-    private fun ocultarTeclado(view: View){
+    private fun ocultarTeclado(view: View) {
         val imm = view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
+
+}
+
+
