@@ -27,7 +27,11 @@ class ComparadorViewModel : ViewModel() {
             _mensajeLiveData.value = "True.\nSon Iguales."
         } else {
             _mensajeLiveData.value = "False.\nSon Distintas."
+
         }
+    }
+    fun camposValidos(palabra1: String, palabra2: String):Boolean {
+        return palabra1.isNotBlank() && palabra2.isNotBlank()
     }
 
 }

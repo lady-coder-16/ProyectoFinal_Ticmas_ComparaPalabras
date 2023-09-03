@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.curso.android.app.proyectofinal.compara_palabras.databinding.ActivityMainBinding
@@ -32,13 +33,17 @@ class MainActivity : AppCompatActivity() {
             val palabra1 = binding.etPalabra1.text.toString()
             val palabra2 = binding.etPalabra2.text.toString()
 
-            viewModel.setPalabras(palabra1, palabra2)
-
-            viewModel.setMensajeResultado()
             ocultarTeclado(it)
+
+            if (viewModel.camposValidos(palabra1, palabra2)) {
+                viewModel.setPalabras(palabra1, palabra2)
+                viewModel.setMensajeResultado()
+            } else {
+                binding.textResultado.text = "Resultado"
+                Toast.makeText(this, "Completa todos los campos.", Toast.LENGTH_SHORT).show()
+            }
         }
     }
-
     private fun updateResultadoComparacion(mensaje: String) {
         binding.textResultado.text = mensaje
     }
@@ -47,7 +52,6 @@ class MainActivity : AppCompatActivity() {
         val imm = view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
-
 }
 
 
