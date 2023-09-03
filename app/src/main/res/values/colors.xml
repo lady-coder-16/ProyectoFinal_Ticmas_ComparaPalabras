@@ -10,6 +10,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="white_grey">#CAD0D3</color>
+    <color name="contrast_btn">#5D4037</color>
 
 <!--    Fondo Degrade   -->
     <color name="start_color">#be93c5</color>
