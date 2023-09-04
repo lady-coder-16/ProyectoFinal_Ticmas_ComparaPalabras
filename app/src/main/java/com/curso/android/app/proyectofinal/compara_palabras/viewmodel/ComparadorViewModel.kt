@@ -4,16 +4,32 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.curso.android.app.proyectofinal.compara_palabras.model.Comparador
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class ComparadorViewModel : ViewModel() {
 
-    private var model: Comparador? = null
+    private val _comparacionResultadoLiveData = MutableLiveData<String>()
+    val comparacionResultadoLiveData: LiveData<String> get() = _comparacionResultadoLiveData
 
-    private val _mensajeLiveData = MutableLiveData<String>()
-    val mensajeLiveData: LiveData<String> get() = _mensajeLiveData
+    fun compararPalabras(model: Comparador){
+        if(model.palabra1.isBlank() || model.palabra2.isBlank()){
+            _comparacionResultadoLiveData.value = "Completa Todos los Campos"
+            return
+        }
 
-
-    fun setPalabras(palabra1: String, palabra2: String) {
+        GlobalScope.launch(Dispatchers.Default){
+            val resultado = if (model.palabra1 == model.palabra2){
+                "True.\nSon Iguales."
+            }else{
+                "False.\nSon Distintas."
+            }
+            _comparacionResultadoLiveData.postValue(resultado)
+        }
+    }
+// --------
+/*    fun setPalabras(palabra1: String, palabra2: String) {
         model = Comparador(palabra1, palabra2)
         setMensajeResultado()
     }
@@ -32,6 +48,6 @@ class ComparadorViewModel : ViewModel() {
     }
     fun camposValidos(palabra1: String, palabra2: String):Boolean {
         return palabra1.isNotBlank() && palabra2.isNotBlank()
-    }
+    }*/
 
 }

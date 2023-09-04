@@ -4,10 +4,10 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.curso.android.app.proyectofinal.compara_palabras.databinding.ActivityMainBinding
+import com.curso.android.app.proyectofinal.compara_palabras.model.Comparador
 import com.curso.android.app.proyectofinal.compara_palabras.viewmodel.ComparadorViewModel
 
 
@@ -24,29 +24,22 @@ class MainActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this)[ComparadorViewModel::class.java]
 
-        viewModel.mensajeLiveData.observe(this) { mensaje ->
-            // Actualiza la IU con el mensaje
-            updateResultadoComparacion(mensaje)
-        }
-
         binding.btnComparar.setOnClickListener {
             val palabra1 = binding.etPalabra1.text.toString()
             val palabra2 = binding.etPalabra2.text.toString()
 
             ocultarTeclado(it)
 
-            if (viewModel.camposValidos(palabra1, palabra2)) {
-                viewModel.setPalabras(palabra1, palabra2)
-                viewModel.setMensajeResultado()
-            } else {
-                binding.textResultado.text = "Resultado"
-                Toast.makeText(this, "Completa todos los campos.", Toast.LENGTH_SHORT).show()
-            }
+            val model = Comparador(palabra1,palabra2)
+            viewModel.compararPalabras(model)
+        }
+        viewModel.comparacionResultadoLiveData.observe(this) { result ->
+            binding.textResultado.text = result
         }
     }
-    private fun updateResultadoComparacion(mensaje: String) {
+    /*private fun updateResultadoComparacion(mensaje: String) {
         binding.textResultado.text = mensaje
-    }
+    }*/
 
     private fun ocultarTeclado(view: View) {
         val imm = view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
